@@ -1,0 +1,14 @@
+@ PBP format
+@ This is the format of the EBOOT.PBP files
+@ Thanks to pdc for infos
+
+string : 4 : Magic
+word : be : Version
+word : be : Param.sfo
+word : be : Icon0.png
+word : be : Icon1.png
+word : be : Pic0.png
+word : be : Pic1.png
+word : be : Snd0.at3
+word : be : Data.psp
+word : be : Data.psar
