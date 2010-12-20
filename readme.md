@@ -1,5 +1,5 @@
-Sketchpad
-=========
+Sketchpad 0.2
+=============
 
 The Lemon Man (C) 2010
 
@@ -32,7 +32,12 @@ of the following values:
     le     - Little Endian
     
 There's a special notation for the 'string' data type, it's the same as 
-above but instead of the endianness holds the string lenght.
+above but instead of the endianness holds the string lenght. The string
+lenght can be either a constant, a field name or one of the following
+special flags:
+    
+    z      - Reads until a zero char is reached
+    uz     - Same as above but for Unicode
 
 Eg. 
     string : <lenght> : <name>
@@ -43,9 +48,12 @@ array size.
 Eg.
     bytearr : <lenght> : <name>
     
+Remember that you may also use a structure field name instead of a
+constant lenght.
+    
 A seeking function is implemented too and can be called as follows:
 
-    seekto : <offset or field name> : <whence>
+    seekto : <offset> : <whence>
     
 You can specify a fixed offset or a structure field name (that has been
 already parsed). The whence field works as it does for any programming
@@ -53,10 +61,34 @@ language, 0 means the offset is absolute, 1 means that the offset is
 relative to the current position and 2 means that the offset is relative
 to the end of file.
 
-See the included pbp.sketch for an example of a sketch file.
+As of 0.2 support to loops has been introduced. Declaring a loop is easy
+as doing:
+
+    loop : <times>
+    ...
+    ...
+    ...
+    loop : end
+    
+and every field included between the two loop markers will be executed
+<times>. The field that get parsed in the loop have the prefix '_loop_N'
+appended (where N is the iteration number) for better recognizing 'em in
+the resulting report. When inside a loop the parser replaces the tag
+
+    {loop} 
+    
+in the field names with the current iteration number, this is meant for 
+accessing indexed fields read in a loop.
+See foster.sketch for an useful example.
+Nested loops aren't supported.
+
+See the included pbp.sketch for an example of a simple sketch file, 
+foster.sketch is a bit more complicated but shows the full potential of 
+the sketchpad.
 
 Todo
 ----
 
-Looping support (?)
-Clean up some parts (?)
+* Proper Unicode char handling (?)
+* EOF checks (?)
+* Clean up some parts (?)

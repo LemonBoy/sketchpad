@@ -1,0 +1,19 @@
+@ Extracts the phrases from the text.dat taken from Foster's house game
+@ for Nintendo Ds.
+@ Format cracked by The Lemon Man
+
+@ Read the phrases number
+word:be:phrases
+@ Loop for every phrase...
+loop:phrases
+@ ...and get the offset
+word:be:offset
+repeat
+
+@ Loop again...
+loop:phrases
+@ ..but now seek to the previously read offset...
+seekto:offset_loop_{loop}:0
+@ ..and read the unicode phrase :D
+string:uz:phrase
+repeat
