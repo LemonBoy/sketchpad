@@ -1,5 +1,5 @@
-Sketchpad 0.2
-=============
+Sketchpad 0.2b
+==============
 
 The Lemon Man (C) 2010
 
@@ -32,24 +32,24 @@ of the following values:
     le     - Little Endian
     
 There's a special notation for the 'string' data type, it's the same as 
-above but instead of the endianness holds the string lenght. The string
-lenght can be either a constant, a field name or one of the following
+above but instead of the endianness holds the string length. The string
+length can be either a constant, a field name or one of the following
 special flags:
     
     z      - Reads until a zero char is reached
     uz     - Same as above but for Unicode
 
 Eg. 
-    string : <lenght> : <name>
+    string : <length> : <name>
     
 Same goes for the 'bytearr' data type, where the second field holds the
 array size.
 
 Eg.
-    bytearr : <lenght> : <name>
+    bytearr : <length> : <name>
     
 Remember that you may also use a structure field name instead of a
-constant lenght.
+constant length.
     
 A seeking function is implemented too and can be called as follows:
 
@@ -68,7 +68,7 @@ as doing:
     ...
     ...
     ...
-    loop : end
+    repeat
     
 and every field included between the two loop markers will be executed
 <times>. The field that get parsed in the loop have the prefix '_loop_N'
@@ -81,6 +81,14 @@ in the field names with the current iteration number, this is meant for
 accessing indexed fields read in a loop.
 See foster.sketch for an useful example.
 Nested loops aren't supported.
+
+As of 0.2b the ability of extracting chunks of the file has been added.
+The syntax is:
+
+    extract : <file name> : <amount of bytes to extract>
+    
+The loop prefix is added to file name if the function is called inside a
+loop.
 
 See the included pbp.sketch for an example of a simple sketch file, 
 foster.sketch is a bit more complicated but shows the full potential of 

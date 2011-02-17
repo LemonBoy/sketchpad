@@ -103,6 +103,12 @@ class SketchParser():
                 array_lenght = self.expandConstant(chunks[1])
                 self._data.append([chunks[2], fp.read(array_lenght), self.TYPE_ARR])
                 
+            elif chunks[0] == 'extract':
+                if self.loop_current != -1:
+                    chunks[1] += '_loop_%i' % self.loop_current
+                    
+                open(chunks[1], 'wb').write(fp.read(int(chunks[2])))
+                
             elif chunks[0] == 'string':
                 if self.loop_current != -1:
                     chunks[2] += '_loop_%i' % self.loop_current
@@ -159,8 +165,8 @@ class SketchParser():
             self.line_count += 1
 
 if __name__ == '__main__':
-    print 'Sketchpad 0.2'
-    print 'The Lemon Man (C) 2010'
+    print 'Sketchpad 0.2b'
+    print 'The Lemon Man (C) 2010-2011'
     
     if len(sys.argv) != 3:
         print 'Usage:\n\t%s <sketch file> <file>' % sys.argv[0]
